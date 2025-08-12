@@ -1,10 +1,36 @@
 services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      # Configure these via a .env file or environment variables
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER:-custom}
+      - VPN_TYPE=${VPN_TYPE:-openvpn} # openvpn or wireguard
+      # OpenVPN credentials (if using OpenVPN)
+      - OPENVPN_USER=${OPENVPN_USER:-}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD:-}
+      # WireGuard (if using WireGuard)
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:-}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES:-}
+      # Optional region/country selection for some providers
+      - SERVER_COUNTRIES=${VPN_COUNTRY:-}
+      - TZ=${TZ:-Etc/UTC}
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+
   uhf-server:
     image: swapplications/uhf-server:1.5.0
     container_name: uhf-server
     restart: unless-stopped
-    ports:
-      - "${PORT:-8000}:${PORT:-8000}"
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
     volumes:
       - ./uhf-recordings:/recordings
       - ./uhf-db:/var/lib/uhf-server
