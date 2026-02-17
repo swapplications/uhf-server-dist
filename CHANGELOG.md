@@ -1,5 +1,10 @@
 # UHF Server - Changelog
 
+## 1.6.0
+
+- Added support for recurring recordings (requires UHF 1.87.0).
+- Improved retry mechanism and added support for more video formats.
+
 ## 1.5.1
 
 - More HLS compatibility fixes.
