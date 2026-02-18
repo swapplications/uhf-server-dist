@@ -4,6 +4,7 @@
 
 - Added support for recurring recordings (requires UHF 1.87.0).
 - Improved retry mechanism and added support for more video formats.
+- Server no longer preventing a server screen from going off.
 
 ## 1.5.1
 
