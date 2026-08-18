@@ -1,5 +1,19 @@
 # UHF Server - Changelog
 
+## 2.0.0
+
+- The macOS and Windows apps have been rebuilt on top of Tauri, replacing the previous
+Electron shell. The apps are now dramatically smaller and lighter.
+- Recordings are now served as HLS streams.
+- The recording engine has been overhauled for reliability, and commercial detection now
+reads the recording playlist directly, making the analysis faster and more robust.
+- The server now notifies UHF with a push notification when the commercial detection of a
+recording completes.
+- Recurring recordings now share a group identifier, so a whole series can be managed and
+cancelled together.
+- Fixed a bug that shut the server down after roughly 10,000 requests had been served,
+interrupting in-progress recordings.
+
 ## 1.6.0
 
 - Added support for recurring recordings (requires UHF 1.87.0).
