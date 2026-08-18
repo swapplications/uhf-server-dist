@@ -1,6 +1,6 @@
 services:
   uhf-server:
-    image: swapplications/uhf-server:1.6.0
+    image: swapplications/uhf-server:2.0.0
     container_name: uhf-server
     restart: unless-stopped
     ports:
