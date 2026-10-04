@@ -4,7 +4,7 @@
 
 ### New: web app for managing the server
 
-- The server now hosts a web page at http://<server-address>:<port>/. In the desktop app, open it from Manage Library... in the menu bar. Other devices on your network can use the address shown in that menu.
+- The server now hosts a web page at http://server-address:port/. In the desktop app, open it from Manage Library... in the menu bar. Other devices on your network can use the address shown in that menu.
 - Sign in with the server password, or open straight in if no password is set. No UHF account is needed. Sessions last 30 days and end when the password changes. After five wrong passwords in a minute, that address is paused for a minute.
 - Scheduled: see recordings in progress (with how much has been captured so far) and upcoming ones. Edit name, start time, duration and weekdays, cancel recordings or whole series, and stop recordings in progress.
 - Library: browse finished, stopped and failed recordings with their details, download them as a single file (resumable), or delete them.
