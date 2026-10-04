@@ -1,5 +1,25 @@
 # UHF Server - Changelog
 
+## 2.1.0
+
+### New: web app for managing the server
+
+- The server now hosts a web page at http://<server-address>:<port>/. In the desktop app, open it from Manage Library... in the menu bar. Other devices on your network can use the address shown in that menu.
+- Sign in with the server password, or open straight in if no password is set. No UHF account is needed. Sessions last 30 days and end when the password changes. After five wrong passwords in a minute, that address is paused for a minute.
+- Scheduled: see recordings in progress (with how much has been captured so far) and upcoming ones. Edit name, start time, duration and weekdays, cancel recordings or whole series, and stop recordings in progress.
+- Library: browse finished, stopped and failed recordings with their details, download them as a single file (resumable), or delete them.
+- Watch: play recordings in the browser, including recordings still in progress with a seekable timeline that keeps growing. Commercial breaks found by Comskip show as markers on the timeline and get a Skip button, like in the apps. Safari plays everything natively. Other browsers play H.264/AAC only and show a notice for other formats.
+- Logs: follow the server log live, with level and text filters. Session tokens are hidden from logged URLs.
+
+### Fixes
+
+- Recurring recordings on the wrong day. Weekdays were matched in UTC, so in the evening in the Americas, or the morning in Asia and Oceania, a series could record a day early or late. The server now uses the time zone of the device that scheduled the recording, and series keep their local time across daylight-saving changes. Recordings scheduled from older app versions still use UTC.
+- Cancelling recurring recordings. Stopping a series now also removes the recording itself if it hasn't started yet. It's safe to do mid-recording: the current recording finishes and no new one is scheduled.
+- HLS recordings that never started. For HLS/DASH streams the server kept reconnecting at the end of each file instead of moving on. Some providers then started returning error 509. Streams where the URL doesn't match the actuau8 links that redirect to a plain MPEG-TS stream) are now detectedcorrectly too.
+- Seeking in recordings still in progress. The server now reports hoo far, so the apps can show a growing, seekable timeline.
+- Leftover processes after quitting (desktop app). Quitting now stops the server and everything it started (ffmpeg, Comskip, sleep prevention) instead of leaving
+  them running.
+
 ## 2.0.0
 
 - The macOS and Windows apps have been rebuilt on top of Tauri, replacing the previous
