@@ -6,7 +6,7 @@ services:
     ports:
       - "${PORT:-8000}:${PORT:-8000}"
     volumes:
-      - ./uhf-recordings:/recordings
+      - "${RECORDINGS_DIR}:/recordings"
       - ./uhf-db:/var/lib/uhf-server
     environment:
       - PORT=${PORT:-8000}
